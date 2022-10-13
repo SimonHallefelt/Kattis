@@ -7,10 +7,7 @@ n = int(input())
 
 for i in range(n):
     s = input()
-    l = len(s)
-    last = int(pos.index(s[0]))
-    moves = 0
-    steps = l-1
+    cost = 0
     stepmap = []
     for j in s:
         a = int(pos.index(j))
@@ -18,23 +15,26 @@ for i in range(n):
             stepmap.append(0)
         else:
             if a > 13:
-                moves += 26 - a
+                cost += 26 - a
             else:
-                moves += a
-            last = a
+                cost += a
             stepmap.append(1)
 
+    l = len(s)
+    steps = l-1
     last = 0
     stepmap[0] = 0
-    numberOfA = 0
+    hasBeenA = False
     if sum(stepmap) == 0:
-        print(moves)
-    elif sum(stepmap) != l-1:
+        print(cost)
+    elif sum(stepmap) == l-1:
+        print(cost + l-1)
+    else:
         for j in range(l*2):
             temp = j%l
             temp2 = 0
             if stepmap[temp] == 1:
-                if last != 0 and numberOfA != 0:
+                if last != 0 and hasBeenA:
                     if temp > last:
                         if l-temp < last:
                             temp2 = (l-temp)*2 + last
@@ -48,7 +48,7 @@ for i in range(n):
                     if temp2 < steps:
                         steps = temp2
                 last = temp
-                numberOfA = 0
+                hasBeenA = False
             else:
-                numberOfA += 1
-    print(moves + steps)
+                hasBeenA = True
+        print(cost + steps)
