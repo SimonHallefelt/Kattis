@@ -27,9 +27,8 @@ for i in range(n):
     hasBeenA = False
     if sum(stepmap) == 0:
         print(cost)
-    elif sum(stepmap) == l-1:
-        print(cost + l-1)
-    else:
+        continue
+    elif sum(stepmap) != l-1:
         for j in range(l*2):
             temp = j%l
             temp2 = 0
@@ -51,4 +50,4 @@ for i in range(n):
                 hasBeenA = False
             else:
                 hasBeenA = True
-        print(cost + steps)
+    print(cost + steps)
