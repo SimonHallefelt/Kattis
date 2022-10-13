@@ -30,9 +30,7 @@ for i in range(n):
     numberOfA = 0
     if sum(stepmap) == 0:
         print(moves)
-    elif sum(stepmap) == l-1:
-        print(moves + l-1)
-    else:
+    elif sum(stepmap) != l-1:
         for j in range(l*2):
             temp = j%l
             temp2 = 0
@@ -43,17 +41,15 @@ for i in range(n):
                             temp2 = (l-temp)*2 + last
                         else:
                             temp2 = (last)*2 + (l-temp)
-                        if temp2 < steps:
-                            steps = temp2
                     else:
                         if l-last > temp:
                             temp2 = last
                         else:
                             temp2 = l-temp
-                        if temp2 < steps:
-                            steps = temp2
+                    if temp2 < steps:
+                        steps = temp2
                 last = temp
                 numberOfA = 0
             else:
                 numberOfA += 1
-        print(moves + steps)
+    print(moves + steps)
