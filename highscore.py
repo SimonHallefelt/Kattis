@@ -16,7 +16,6 @@ for i in range(n):
         a = int(pos.index(j))
         if a == 0:
             stepmap.append(0)
-            continue
         else:
             if a > 13:
                 moves += 26 - a
