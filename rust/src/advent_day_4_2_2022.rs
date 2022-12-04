@@ -19,18 +19,17 @@ fn main(){
             span4.push(i.parse::<i32>().unwrap());
         }
 
-        if span4[0] == span4[2] || span4[1] == span4[3]{
+        if span4[0] == span4[2] || span4[1] == span4[3] || span4[0] == span4[3] || span4[1] == span4[2]{
             total += 1;
-        }else if span4[0] < span4[2]{
-            if span4[1] > span4[3]{
-                total += 1;
-            }
-        }else{
-            if span4[1] < span4[3]{
-                total += 1;
-            }
+        }else if span4[0] < span4[2] && span4[1] > span4[3]{
+            total += 1;
+        }else if span4[0] > span4[2] && span4[1] < span4[3]{
+            total += 1;
+        }else if span4[0] > span4[2] && span4[0] < span4[3]{
+            total += 1;
+        }else if span4[1] > span4[2] && span4[1] < span4[3]{
+            total += 1;
         }
-
         println!("{}", total);
     }
 }
