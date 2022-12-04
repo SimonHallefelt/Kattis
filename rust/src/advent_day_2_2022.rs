@@ -5,6 +5,7 @@
 //0 if you lost, 3 if the round was a draw, and 6 if you won
 
 use std::io;
+use std::collections::HashSet;
 
 fn main(){
     let mut total: i32 = 0;
