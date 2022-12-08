@@ -9,7 +9,6 @@ fn main() {
     let mut map_s: HashMap<String, HashSet<String>> = HashMap::new();
     let mut map_i: HashMap<String, i32>  = HashMap::new();
 
-    
     loop{
         let mut input = String::new();
         io::stdin().read_line(&mut input).expect("Failed to read line");
@@ -61,10 +60,7 @@ fn main() {
             if temp1 <= 100000 {
                 total += temp1;
             }
-            
         }
         println!("total = {}", total);
     }
 }
-
-
