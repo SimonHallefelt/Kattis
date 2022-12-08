@@ -1,6 +1,10 @@
 rust/target/
 /rust/target/
 target/
+*.json
+*.rustc_info.json
+*.rustc_info
+
 .json
 .rustc_info.json
 .rustc_info
