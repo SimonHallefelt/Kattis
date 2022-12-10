@@ -1,0 +1,44 @@
+class Fenwick{
+public:
+
+    Fenwick(vector<ll> v){
+        n = v.size() + 1;
+        bit.assign(n, 0);
+
+        rep(i,0,n) if(v[i]) update(i, v[i]);
+    }
+
+    Fenwick(int len){
+        n = len + 1;
+        bit.assign(n, 0);
+    }
+
+    void update(int ind, ll delta){
+        ind++;
+        while(ind < n){
+            bit[ind] += delta;
+            ind += ind&(-ind);
+        }
+    }
+
+    ll query(int l, int r){
+        return prefixSum(r) - prefix(l - 1);
+    }
+
+    ll prefixSum(int ind){
+
+        ll tot = 0;
+        ind++;
+        while(ind){
+            tot += bit[ind];
+            ind -= ind&(-ind);
+        }
+
+        return tot;
+    }
+
+private:
+    int n;
+    vector<ll> bit;
+
+};
