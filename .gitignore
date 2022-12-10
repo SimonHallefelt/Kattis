@@ -11,3 +11,4 @@ target/
 
 *.pdb
 *.exe
+rust/target/.rustc_info.json
