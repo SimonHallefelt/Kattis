@@ -1,0 +1,73 @@
+// Important import statements  
+import java.util.*;  
+import java.io.*;  
+import java.lang.*;  
+public class FenwickTreeExample  
+{  
+    // Max size of the Fenwick tree in this code  
+    final static int MAX_SIZE = 100;  
+    // the array that represents the fenwick tree  
+    private int fenArr[] = new int[MAX_SIZE];  
+    // s --> It is number of element available in the input array.  
+    // fenArr[0 ... s] --> The array that represents the Fenwick Tree  
+    // a[0 ... s - 1] --> It is the input array for which the prefix sum is generated.  
+    // Returns the sum of a[0... idx]. The method assumes  
+    // that the array is already preprocessed and  
+    // the partial sums of the array elements are kept  
+    // in fenArr[].  
+    int getArrSum(int idx)  
+    {  
+        // Initializing the result to 0  
+        int total = 0;  
+        // index in the fenTree[] is one more than the  
+        // index in the array a[]  
+        idx = idx + 1;  
+        // Traversing the ancestors of the fenTree[idx]  
+        while(idx > 0)  
+        {  
+            // Adding the current element of the array fenArr[]  
+            // to the total  
+            total = total + fenArr[idx];  
+            // Moving the index to the parent node in  
+            // getArrSum view  
+            idx -= idx & (-idx);  
+        }  
+        return total;  
+    }  
+    // Updating a node in the Fenwick Tree  
+    // at a given index in the array fenArr[]. The given input value  
+    // 'v' is added to the fenArr[idx] and therefore, it is also added to the  
+    // ancestors of the tree too.  
+    public void updateFenwick(int s, int idx, int v)  
+    {  
+        // index in the array fenArr[] is 1 more than the  
+        // index in the array a[]  
+        idx = idx + 1;  
+        // Traversing all the ancestors and adding 'v'  
+        while(idx <= s)  
+        {  
+            // Add 'val' to current node of BIT Tree  
+            fenArr[idx] = fenArr[idx]  + v;  
+            
+            // Updating the idx to that of parent  
+            // in the update View  
+            idx = idx + (idx & (-idx));  
+        }  
+    }  
+    // Method to build the Fenwick tree  
+    // from the given array.  
+    void constructFenTree(int arr[], int s)  
+    {  
+        // Initializing fenArr[] as 0  
+        for(int i = 1; i <= s; i++)  
+        {  
+            fenArr[i] = 0;  
+        }  
+        // Storing the original values in the fenArr[]  
+        // using the mehtod updateFenwick()  
+        for(int j = 0; j < s; j++)  
+        {  
+            updateFenwick(s, j, arr[j]);  
+        }  
+    }
+}

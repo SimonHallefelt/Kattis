@@ -1,3 +1,20 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+class supercomputer {
+    public static void main(String[] args) {
+        FastReader sc = new FastReader();
+        int n = sc.nextInt();
+        int k = sc.nextInt();
+        sc.nextLine();
+
+        
+
+    }
+}
+
 class FastReader {
     BufferedReader br;
     StringTokenizer st;
