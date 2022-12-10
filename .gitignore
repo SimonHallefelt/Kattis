@@ -1,8 +1,0 @@
-#rust
-rust/target/
-*.pdb
-*.exe
-rust/target/.rustc_info.json
-
-#java
-*.class
