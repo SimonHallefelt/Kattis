@@ -36,7 +36,7 @@ fn main() {
                 rope[0][0] -= 1;
             }else if input[0].to_string() == "R" {
                 rope[0][1] += 1;
-            }else{ //down
+            }else{ //left
                 rope[0][1] -= 1;
             }
 
