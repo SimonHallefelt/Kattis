@@ -1,0 +1,9 @@
+#rust
+rust/target/
+*.exe
+#*.
+rust/target/.rustc_info.json
+
+#java
+*.class
+
