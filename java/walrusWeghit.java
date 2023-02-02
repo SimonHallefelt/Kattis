@@ -16,7 +16,7 @@ public class walrusWeghit {
         }
     }
     
-    public int thing(int plate, ){
+    public int thing(int plate, int cap){
 
 
         return cap;
