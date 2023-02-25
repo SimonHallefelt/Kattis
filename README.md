@@ -14,6 +14,14 @@ python file.py
 # Rust
 ```
 cd rust
+cd src
+rustc file.rs
+.\file.exe
+
+OR
+
+cargo build
+cargo run
 
 ```
 
