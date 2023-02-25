@@ -20,6 +20,7 @@ rustc file.rs
 
 OR
 
+*cargo new ProdjektName
 cargo build
 cargo run
 
@@ -28,5 +29,10 @@ cargo run
 # C++
 ```
 cd c++
+g++ file.cpp (g++ file.cpp -o file)
+.\file
 
+
+User Snippet (cpp.jason) (C:\Users\Simon\AppData\Roaming\Code\User\snippets\cpp.jason.code-snippets)
+skapa fil skriv "main"
 ```
