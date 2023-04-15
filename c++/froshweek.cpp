@@ -10,7 +10,6 @@ int query(int idx) {            // sum of first idx elements, idx is a[i] 1-inde
     int res = 0;
     while (idx > 0) {           // idx is 1-indexed
         res += bit[idx];        // add the value at idx
-        cout << "+idx: " << idx << " -idx: " << -idx << " (idx & -idx): " << (idx & -idx) << " (idx -= idx & -idx): " << (idx - (idx & -idx)) << endl;
         idx -= idx & -idx;      // move to the parent node
         cout << "idx: " << idx << endl;
     }
@@ -40,7 +39,6 @@ int main() {    // BIT
         int num_swaps = i - query(pos);                                     // number of elements to the left of pos that are greater than a[i]
         update(pos, 1);                                                     // mark a[i] as visited
         total += num_swaps;
-        cout << "pos: " << pos << " num_swaps: " << num_swaps << endl;
     }
     cout << total << endl;
     return 0;
