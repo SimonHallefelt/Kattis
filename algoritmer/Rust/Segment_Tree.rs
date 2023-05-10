@@ -1,4 +1,5 @@
 //segement tree för att kunna göra snabba queries på intervall
+//alla värden placeras längst ner och varje upp är en sammanfatnig av noderna under
 
 fn main(){
     let array = vec![1,2,3,4,5,6,7,8,9,10];
