@@ -26,7 +26,7 @@ fn main(){
         let box_to_move = input[1].parse::<i32>().unwrap();
         let cargo_from = input[3].parse::<i32>().unwrap() -1;
         let cargo_to = input[5].parse::<i32>().unwrap() -1;
-
+        
         let mut temp: Vec<&str> = Vec::new();
 
         for i in 0..box_to_move{
