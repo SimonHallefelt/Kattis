@@ -1,8 +1,9 @@
 #rust
-rust/target/
+rust/target/*
 *.exe
 *.pdb
 rust/target/.rustc_info.json
+*/.vscode
 
 #java
 *.class
