@@ -12,7 +12,7 @@ fn read_input() -> String {
     let mut input = String::new();
     io::stdin().read_line(&mut input).expect("Failed to read line");
     let input = input.trim().to_string();
-    return input;
+    input
 }
 
 fn solve(vec: &Vec<i64>, dp: &mut Vec<Vec<i64>>, l: i64, r: i64, steps: i64) -> i64 {
