@@ -53,7 +53,7 @@ fn main() {
         }
     }
     
-    for r in 0..rounds {
+    for _ in 0..rounds {
         for i in 0..monkys {
             inspected_items[i] += items[i].len() as i64;
             for _ in 0..items[i].len() {
