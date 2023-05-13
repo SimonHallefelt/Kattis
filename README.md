@@ -24,6 +24,9 @@ OR
 cargo build
 cargo run
 
+OR
+
+cargo run --bin file.rs
 ```
 
 # C++

@@ -58,7 +58,7 @@ fn main() {
         pruduct_all_divisors *= test[i][0];
     }
 
-    for r in 0..rounds {
+    for _ in 0..rounds {
         for i in 0..monkys {
             inspected_items[i] += items[i].len() as i128;
             for _ in 0..items[i].len() {
