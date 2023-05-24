@@ -44,5 +44,9 @@
         "xutility": "cpp",
         "vector": "cpp",
         "string": "cpp"
-    }
+    },
+    "rust-analyzer.linkedProjects": [
+        ".\\rust\\Cargo.toml",
+        ".\\rust\\Cargo.toml"
+    ]
 }
