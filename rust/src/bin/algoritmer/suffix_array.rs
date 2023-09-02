@@ -54,6 +54,7 @@ fn _lcp_array(word: &str, suffix_array: Vec<usize>) -> Vec<usize> {
     lcp_array
 }
 
+//tests:
 #[cfg(test)]
 mod tests {
     use super::*;

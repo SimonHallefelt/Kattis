@@ -15,6 +15,8 @@ fn main(){
             println!("no solution");
         }
     }
+
+    let n: usize = read!();
 }
 
 fn read_line() -> String {
