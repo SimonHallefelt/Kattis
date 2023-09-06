@@ -50,6 +50,14 @@
         ".\\rust\\Cargo.toml",
         ".\\rust\\Cargo.toml",
         ".\\rust\\Cargo.toml",
+        ".\\rust\\Cargo.toml",
+        ".\\rust\\Cargo.toml",
+        ".\\rust\\Cargo.toml",
+        ".\\rust\\Cargo.toml",
+        ".\\rust\\Cargo.toml",
         ".\\rust\\Cargo.toml"
+    ],
+    "cSpell.words": [
+        "Deque"
     ]
 }
