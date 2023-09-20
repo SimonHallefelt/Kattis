@@ -58,6 +58,7 @@
         ".\\rust\\Cargo.toml"
     ],
     "cSpell.words": [
-        "Deque"
+        "Deque",
+        "powf"
     ]
 }
