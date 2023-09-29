@@ -3,7 +3,6 @@ use std::{io, collections::HashMap};
 fn main () {
     let input = read_input();
     for _ in 0..input[0]-1 {read_input();}
-    
     println!("{}", run(input[0], input[1]));
 }
 
@@ -71,7 +70,7 @@ mod tests {
         let answer = run(2500,2500);
         let done = SystemTime::now();
         let time = done.duration_since(start);
-        assert_eq!(answer, 954730329, "time = {:?}", time); //time = 0,0 ms
+        assert_eq!(answer, 954730329, "time = {:?}", time);
     }
 
     #[test]
@@ -80,6 +79,7 @@ mod tests {
         let answer = run(2500,1250);
         let done = SystemTime::now();
         let time = done.duration_since(start);
-        assert_eq!(answer, 99379097, "time = {:?}", time); //time = 2,8s
+        assert_eq!(answer, 99379097, "time = {:?}", time);
     }
+    //time 2,5s
 }
