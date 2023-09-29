@@ -61,7 +61,7 @@ mod tests {
     #[test]
     fn test_1() {
         let answer = run(6,5);
-        assert_eq!(answer, 1200); //1200 kanske
+        assert_eq!(answer, 1200);
     }
 
     #[test]
