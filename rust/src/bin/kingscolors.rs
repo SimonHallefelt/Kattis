@@ -1,64 +1,42 @@
-use std::io;
+use std::{io, collections::HashMap};
 
 fn main () {
     let input = read_input();
     for _ in 0..input[0]-1 {read_input();}
+    
     println!("{}", run(input[0], input[1]));
 }
 
-fn run(n: i128, k: i128) -> i128 {
-    let mut v: Vec<Vec<i128>> = Vec::new();
-    let max: i128 = n+1;
+fn run(n: i64, k: i64) -> i64 {
+    let mut hm = HashMap::new();
     let modd = 1000000007;
+    for n in 0..n+1 {
+        hm.insert((n, 2), 1);
+        hm.insert((n, n), 1);
+    }
     let mut factorial = Vec::new();
     factorial.push(1);
-    for i in 0..max {
-        let temp = Vec::new();
-        v.push(temp);
+    for i in 0..k+1 {
         factorial.push((factorial[i as usize]*(i+1)) % modd)
     }
-    //k*(k-1)^(n-1)-k*(k-1)(k-2)^(n-1)+
-    for n in n..max {
-        for k in 0..k+1 {
-            if n < 2 || k < 2 {
-                v[n as usize].push(1);
-                continue;
-            } else if k == 2 {
-                v[n as usize].push(2);
-                continue;
-            }
-            let mut aw = k;
-            for _ in 1..n {
-                aw = (aw*(k-1)) % modd;
-            }
-            let mut nacu = k *(k-1);
-            for _ in 1..n {
-                nacu = (nacu*(k-2)) % modd;
-            }
-            let mut fac = 1;
-            //println!("");
-            for i in (2..k).rev() {
-                //fac = factorial[k as usize] / ((factorial[i as usize] * factorial[(k-i) as usize]) % modd);
-                let fac_t = factorial[k as usize];
-                let fac_b = (factorial[i as usize] * factorial[(k-i) as usize]) % modd;
-                fac = fac_t / fac_b; //blir fel vid stora k på grund av mod (tror jag)
-                
-                //print!("i = {}, fac = {} ", i, fac);
-                aw = (aw - fac * v[n as usize][(i) as usize]) % modd;
-                if aw < 0 {aw += modd}
-            }
-            v[n as usize].push(aw.clone());
-        }
-        //println!("");
-        //println!("{:?}", v[n as usize]);
-    }
-   v[n as usize][k as usize]
+    run2(n, k, &mut hm, modd) * factorial[k as usize] % modd
 }
 
-fn read_input() -> Vec<i128> {
+fn run2(n: i64, k: i64, hm: &mut HashMap<(i64, i64), i64>, modd: i64) -> i64 {
+    if hm.contains_key(&(n, k)) {
+        return *hm.get(&(n, k)).unwrap();
+    }
+    let temp1 = run2(n-1, k, hm, modd);
+    let temp2 = run2(n-1, k-1, hm, modd);
+    let answer = (temp1 * (k-1) + temp2) % modd;
+    hm.insert((n, k), answer);
+    answer
+}
+
+fn read_input() -> Vec<i64> {
     let mut input = String::new();
     io::stdin().read_line(&mut input).expect("F");
-    input.trim().to_string().split(" ").map(|x| x.parse::<i128>().unwrap()).collect()
+    input.trim().to_string().split(" ").map(|x| x.parse::<i64>().unwrap()).collect()
 }
 
 
@@ -88,11 +66,20 @@ mod tests {
     }
 
     #[test]
-    fn test_speed() {
+    fn test_speed_1() {
         let start = SystemTime::now();
         let answer = run(2500,2500);
         let done = SystemTime::now();
         let time = done.duration_since(start);
-        assert_eq!(answer, -1, "time = {:?}", time); //time = 0,901 ms
+        assert_eq!(answer, 954730329, "time = {:?}", time); //time = 0,0 ms
+    }
+
+    #[test]
+    fn test_speed_2() {
+        let start = SystemTime::now();
+        let answer = run(2500,1250);
+        let done = SystemTime::now();
+        let time = done.duration_since(start);
+        assert_eq!(answer, 99379097, "time = {:?}", time); //time = 2,8s
     }
 }
