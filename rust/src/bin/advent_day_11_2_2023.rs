@@ -4,7 +4,7 @@ fn main(){
     let mut total: i64 = 0;
     
     //let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_11_test.txt"; //
-    let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_11.txt"; //
+    let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_11.txt"; // 650672493820
     let contents = fs::read_to_string(file_path)
         .expect("Should have been able to read the file");
 
@@ -17,23 +17,18 @@ fn main(){
         if c.contains('#') {
             find_galaxy(c, &mut starts, map.len());
         } else {
-            println!("hej");
             empty_row.push(map.len());
         }
         map.push(input);
     }
 
     empty_col = find_empty_col(&map);
-    println!("starts = {:?}, starts.len() = {}", starts, starts.len());
-    println!("empty_col = {:?}, empty_col.len() = {}", empty_col, empty_col.len());
-
 
     for i in 0..starts.len() {
         for j in i..starts.len() {
             total += get_distans(starts[i], starts[j], &empty_col, &empty_row);
         }
     }
-
 
     println!("total = {}", total);
 }

@@ -16,23 +16,18 @@ fn main(){
         if c.contains('#') {
             find_galaxy(c, &mut starts, map.len());
         } else {
-            println!("hej");
             map.push(input.clone());
         }
         map.push(input);
     }
 
     empty_col = find_empty_col(&map);
-    println!("starts = {:?}, starts.len() = {}", starts, starts.len());
-    println!("empty_col = {:?}, empty_col.len() = {}", empty_col, empty_col.len());
-
 
     for i in 0..starts.len() {
         for j in i..starts.len() {
             total += get_distans(starts[i], starts[j], &empty_col);
         }
     }
-
 
     println!("total = {}", total);
 }
