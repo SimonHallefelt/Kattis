@@ -9,16 +9,16 @@ fn main(){
     let contents = fs::read_to_string(file_path)
         .expect("Should have been able to read the file");
 
-        let mut map = Vec::new();
-        let mut start = (usize::MAX, usize::MAX);
-        for c in contents.trim().split("\n") {
-            let input = fix_input(c);
-            if c.contains('S') {
-                start = (map.len(), find_start(c));
-            }
-            map.push(input);
+    let mut map = Vec::new();
+    let mut start = (usize::MAX, usize::MAX);
+    for c in contents.trim().split("\n") {
+        let input = fix_input(c);
+        if c.contains('S') {
+            start = (map.len(), find_start(c));
         }
-        map[start.0][start.1] = fix_start(&map, start);
+        map.push(input);
+    }
+    map[start.0][start.1] = fix_start(&map, start);
 
     total = find_farthest(&map, start, map[start.0 as usize][start.1 as usize].1, 0);
 
