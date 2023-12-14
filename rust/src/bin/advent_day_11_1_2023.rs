@@ -1,0 +1,76 @@
+use std::{fs, cmp::{min, max}};
+
+fn main(){
+    let mut total: i64 = 0;
+    
+    //let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_11_test.txt"; //374
+    let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_11.txt"; //9795148
+    let contents = fs::read_to_string(file_path)
+        .expect("Should have been able to read the file");
+
+    let mut map = Vec::new();
+    let empty_col;
+    let mut starts = Vec::new();
+    for c in contents.trim().split("\n") {
+        let input = fix_input(c);
+        if c.contains('#') {
+            find_galaxy(c, &mut starts, map.len());
+        } else {
+            map.push(input.clone());
+        }
+        map.push(input);
+    }
+
+    empty_col = find_empty_col(&map);
+
+    for i in 0..starts.len() {
+        for j in i..starts.len() {
+            total += get_distans(starts[i], starts[j], &empty_col);
+        }
+    }
+
+    println!("total = {}", total);
+}
+
+
+fn get_distans(start: (usize, usize), end: (usize, usize), empty_col: &Vec<usize>) -> i64 {
+    let mut steps = 0;
+    for ec in empty_col {
+        if *ec > min(start.1, end.1) && *ec < max(start.1, end.1) {
+            steps += 1
+        }
+    }
+    steps += (start.0 as i64 - end.0 as i64).abs() + (start.1 as i64 - end.1 as i64).abs();
+    steps
+}
+
+
+fn find_empty_col(map: &Vec<Vec<char>>) -> Vec<usize> {
+    let mut empty_col = Vec::new();
+    for j in 0..map[0].len() {
+        let mut b = true;
+        for i in 0..map.len() {
+            if map[i][j] == '#' {
+                b = false;
+            }
+        }
+        if b {
+            empty_col.push(j);
+        }
+    }
+    empty_col
+}
+
+
+fn find_galaxy(line: &str, start: &mut Vec<(usize, usize)>, ml: usize) {
+    for c in line.trim().chars().enumerate() {
+        if c.1 == '#' {
+            start.push((ml, c.0));
+        }
+    }
+}
+
+
+fn fix_input(line: &str) -> Vec<char> {
+    line.trim().chars().collect()
+}
