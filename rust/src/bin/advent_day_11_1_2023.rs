@@ -3,8 +3,8 @@ use std::{fs, cmp::{min, max}};
 fn main(){
     let mut total: i64 = 0;
     
-    //let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_11_test.txt"; //374
-    let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_11.txt"; //9795148
+    //let file_path = "src\\advent_of_code\\2023\\data\\day_11_test.txt"; //374
+    let file_path = "src\\advent_of_code\\2023\\data\\day_11.txt"; //9795148
     let contents = fs::read_to_string(file_path)
         .expect("Should have been able to read the file");
 
