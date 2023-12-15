@@ -3,8 +3,8 @@ use std::{fs, collections::HashSet};
 fn main(){
     let mut total: i64 = 0;
 
-    //let file_path = "C:\\Users\\simon\\Documents\\Simon\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_14_test.txt"; //64
-    let file_path = "C:\\Users\\simon\\Documents\\Simon\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_14.txt"; //99641
+    //let file_path = "src\\advent_of_code\\2023\\data\\day_14_test.txt"; //64
+    let file_path = "src\\advent_of_code\\2023\\data\\day_14.txt"; //99641
     let contents = fs::read_to_string(file_path)
         .expect("Should have been able to read the file");
 
