@@ -3,9 +3,9 @@ use std::{fs, collections::HashMap};
 fn main(){
     let mut total: i64 = 0;
     
-    //let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_10_test3.txt"; //8
-    //let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_10_test4.txt"; //10
-    let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_10.txt"; //595
+    //let file_path = "src\\advent_of_code\\2023\\data\\day_10_test3.txt"; //8
+    //let file_path = "src\\advent_of_code\\2023\\data\\day_10_test4.txt"; //10
+    let file_path = "src\\advent_of_code\\2023\\data\\day_10.txt"; //595
     let contents = fs::read_to_string(file_path)
         .expect("\n---\nShould have been able to read the file\n---\n");
 

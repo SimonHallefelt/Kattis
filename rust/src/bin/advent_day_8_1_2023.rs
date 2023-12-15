@@ -2,9 +2,9 @@ use std::{fs, collections::HashMap};
 
 fn main(){
     let mut total: i64 = 0;
-    //let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_8_test.txt";
-    //let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_8_test2.txt";
-    let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_8.txt";
+    //let file_path = "src\\advent_of_code\\2023\\data\\day_8_test.txt";
+    //let file_path = "src\\advent_of_code\\2023\\data\\day_8_test2.txt";
+    let file_path = "src\\advent_of_code\\2023\\data\\day_8.txt";
     let contents = fs::read_to_string(file_path)
         .expect("Should have been able to read the file");
     let mut lr: Vec<_>= Vec::new();
