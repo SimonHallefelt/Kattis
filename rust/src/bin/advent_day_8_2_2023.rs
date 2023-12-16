@@ -1,12 +1,12 @@
 use std::{fs, collections::{HashMap, HashSet}};
 
 fn main(){
-    let mut total: i64 = 0;
+    let mut total: i128 = 0;
     //let file_path = "src\\advent_of_code\\2023\\data\\day_8_test.txt";
     //let file_path = "src\\advent_of_code\\2023\\data\\day_8_test2.txt";
     //let file_path = "src\\advent_of_code\\2023\\data\\day_8_test3.txt";
-    let file_path = "src\\advent_of_code\\2023\\data\\day_8.txt";
-    let contents = fs::read_to_string(file_path)
+    let file_path = "D:\\Kattis\\rust\\src\\advent_of_code\\2023\\data\\day_8.txt"; //13334102464297
+    let contents = fs::read_to_string(file_path)            
         .expect("Should have been able to read the file");
     let mut lr: Vec<_> = Vec::new();
     let mut map = HashMap::new();
@@ -40,59 +40,56 @@ fn main(){
     }
 
     for i in 0..end_points.len() {
-        movee(pos[i].clone(), end_points.clone(), map.clone(), lr.clone(), list[i].clone())
+        check_moves(pos[i].clone(), end_points.clone(), map.clone(), lr.clone(), list[i].clone())
     }
 
-    total = 1;
+    let mut steps = Vec::new();
+    let start_cycles = 10000000000*2*2*2*2*2*2*2*2*2*2;
+    for i in 0..pos.len() {
+        let step = list[i].0+list[i].2[0]+(start_cycles/list[i].1) * list[i].1;
+        steps.push(step)
+    }
+    println!("start_points = {}", steps.len());
     loop {
-        let mut sets = Vec::new();
-
-        for i in 0..end_points.len() {
-            let mut set = HashSet::new();
-            for j in 0..list[i].2.len() {
-                set.insert(list[i].0 + list[i].1 * (total-1) + list[i].2[j]);
+        let mut max_value = 0;
+        for i in 0..steps.len() {
+            if max_value < steps[i] {
+                max_value = steps[i];
             }
-            sets.push(set);
         }
-
-
-        let (intersection, others) = sets.split_at_mut(1);
-        let intersection = &mut intersection[0];
-        for other in others {
-            intersection.retain(|e| other.contains(e));
+        for i in 0..steps.len() {
+            if max_value > steps[i] {
+                steps[i] += list[i].1;
+            }
         }
-
-
-        if intersection.len() > 0 {
-            total = *intersection.iter().min().unwrap();
-            break;
+        let mut b = true;
+        for i in 1..steps.len() {
+            if max_value != steps[i] {
+                b = false;
+                break;
+            }
         }
-        total += 1;
+        if b {break;}
+
+        if max_value > total {
+            println!("{}", total);
+            total += 100000000000;
+        }
+        if start_cycles*2*list[0].1 + (list[0].1 * 100) < steps[0] {
+            println!("fail at {}", total);
+            return;
+        }
     }
 
-    /* let mut movee = 0;
-    println!("start_points = {}", pos.len());
-    while !found.iter().all(|x| !!x) {
-        for i in 0..pos.len() {
-            if lr[movee] == 'L' {pos[i] = map.get(&pos[i]).unwrap().0.clone()}
-            else {pos[i] = map.get(&pos[i]).unwrap().1.clone()}
-            if end_points.contains(&pos[i]) {found[i] = true}
-            else {found[i] = false}
-        }
-        total += 1;
-        movee += 1; movee %= lr.len();
-        if total % 1000000 == 0 {println!("{}", total)}
-    } */
-
-    println!("total = {}", total);
+    println!("total = {}", steps[0]);
 }
 
 
-fn movee(start: String, end_points: HashSet<String>, map: HashMap<String, (String, String)>, lr: Vec<char>, list: (i64, i64, Vec<i64>)) {
+fn check_moves(start: String, end_points: HashSet<String>, map: HashMap<String, (String, String)>, lr: Vec<char>, list: (i128, i128, Vec<i128>)) {
     let steps = list.0+list.2[0]+list.1;
     let mut movee = 0;
     let mut p = start;
-    for i in 1..steps {
+    for i in 0..steps {
         if lr[movee] == 'L' {p = map.get(&p).unwrap().0.clone()}
         else {p = map.get(&p).unwrap().1.clone()}
         
@@ -105,29 +102,24 @@ fn movee(start: String, end_points: HashSet<String>, map: HashMap<String, (Strin
 }
 
 
-fn circular(start: String, end_points: HashSet<String>, map: HashMap<String, (String, String)>, lr: Vec<char>) -> (i64, i64, Vec<i64>) {
+fn circular(start: String, end_points: HashSet<String>, map: HashMap<String, (String, String)>, lr: Vec<char>) -> (i128, i128, Vec<i128>) {
     let mut steps = 0;
     let mut circular = HashSet::new();
-    let mut circular_info = HashMap::new();
-    let circular_start;
 
     let mut movee = 0;
     let mut p = start;
     while circular.insert((p.clone(), movee)) {
-        circular_info.insert(p.clone(), steps);
-
         if lr[movee] == 'L' {p = map.get(&p).unwrap().0.clone()}
         else {p = map.get(&p).unwrap().1.clone()}
         
         steps += 1;
         movee += 1; movee %= lr.len();
     }
-    circular_start = p.clone();
+    let circular_steps = steps;
     steps = 0;
     circular = HashSet::new();
     let mut list = Vec::new();
     while circular.insert((p.clone(), movee)) {
-
         if lr[movee] == 'L' {p = map.get(&p).unwrap().0.clone()}
         else {p = map.get(&p).unwrap().1.clone()}
         
@@ -139,6 +131,6 @@ fn circular(start: String, end_points: HashSet<String>, map: HashMap<String, (St
         }
     }
 
-    println!("{:?}",(*circular_info.get(&circular_start).unwrap() ,circular.len() as i64, list.clone()));
-    (*circular_info.get(&circular_start).unwrap() ,circular.len() as i64, list)
+    println!("{:?}",(circular_steps, circular.len() as i128, list.clone()));
+    (circular_steps ,circular.len() as i128, list)
 }
