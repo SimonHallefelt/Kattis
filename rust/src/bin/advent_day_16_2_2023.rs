@@ -1,6 +1,6 @@
 use std::{fs, collections::HashSet, cmp::max};
 
-fn main(){
+fn main() {
     let mut total: i64 = 0;
 
     //let file_path = "src\\advent_of_code\\2023\\data\\day_16_test.txt"; //51
