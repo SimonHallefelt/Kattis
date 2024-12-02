@@ -16,6 +16,8 @@ fn main(){
 
     // let file_path = "src\\advent_of_code\\2023\\data\\day_24_test.txt"; // 2
     let file_path = "src\\advent_of_code\\2023\\data\\day_24.txt"; // 12938
+    let file_path = "data\\day_24_gustav.txt";
+    // let file_path = "rust\\src\\advent_of_code\\2023\\data\\day_24.txt"; // 12938
     let contents = fs::read_to_string(file_path)
         .expect("Should have been able to read the file");
 
