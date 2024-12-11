@@ -51,9 +51,5 @@ fn main() {
 
 fn read_input(path: &str) -> Vec<Vec<i64>> {
     let input = fs::read_to_string(path).expect("could not read string");
-    let mut reports = Vec::new();
-    for r in input.split("\n") {
-        reports.push(r.trim().split(" ").map(|a| a.parse::<i64>().unwrap()).collect());
-    }
-    reports
+    input.trim().split("\n").map(|a| a.trim().split(" ").map(|b| b.parse().unwrap()).collect()).collect()
 }

@@ -23,16 +23,12 @@ fn main() {
 fn read_line(file_path: &str) -> (Vec<i64>, Vec<i64>) {
     let contents = fs::read_to_string(file_path)
         .expect("Should have been able to read the file");
-    
-    let mut left = Vec::new();
-    let mut right = Vec::new();
 
-    for c in contents.trim().split("\n") {
-        let a: Vec<i64> = c.trim().split(" ").filter(|i| !i.is_empty()).map(|i| i.parse::<i64>().unwrap()).collect();
-        left.push(*a.get(0).unwrap());
-        right.push(*a.get(1).unwrap());
-        println!("{:?}, {:?}, {:?}", c, left.last().unwrap(), right.last().unwrap());
-    }
-
-    (left, right)
+    contents.trim()
+        .split("\n")
+        .map(|a| a.trim().split_whitespace().map(|b| b.parse().unwrap()).collect())
+        .collect::<Vec<Vec<i64>>>()
+        .iter()
+        .map(|a| (a.first().unwrap(), a.last().unwrap()))
+        .collect()
 }

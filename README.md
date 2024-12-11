@@ -26,7 +26,7 @@ cargo run
 
 OR
 
-cargo run --bin file.rs
+cargo run --bin file_name (file_name does not include .rs)
 ```
 
 # C++
