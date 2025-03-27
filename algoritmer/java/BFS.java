@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BFS<T> {
+public class BFS {
     private ArrayList<Integer> bfs(HashMap<Integer, HashSet<Integer>> graf, int startNode, int endNode) {
         Queue<Integer> possibleRouts = new LinkedList<>();
         HashMap<Integer, Integer> pastNodes = new HashMap<>();
