@@ -1,3 +1,5 @@
+use std::collections::{HashMap, HashSet, VecDeque};
+
 fn bfs(graph: &HashMap<i32, HashSet<i32>>, start_node: i32, end_node: i32) -> Vec<i32> {
     let mut previous_node = HashMap::new();
     let mut queue = VecDeque::from(vec![start_node]);
@@ -44,12 +46,12 @@ mod tests {
             (7, HashSet::from([8])),
             (8, HashSet::from([7]))
         ]);
-        assert_eq!(1, bfs2(&graph, 1, 1).len());
-        assert_eq!(4, bfs2(&graph, 1, 6).len());
-        assert_eq!(0, bfs2(&graph, 1, 8).len());
-        assert_eq!(2, bfs2(&graph, 7, 8).len());
-        assert_eq!(2, bfs2(&graph, 8, 7).len());
+        assert_eq!(1, bfs(&graph, 1, 1).len());
+        assert_eq!(4, bfs(&graph, 1, 6).len());
+        assert_eq!(0, bfs(&graph, 1, 8).len());
+        assert_eq!(2, bfs(&graph, 7, 8).len());
+        assert_eq!(2, bfs(&graph, 8, 7).len());
 
-        assert_ne!(0, bfs2(&graph, 7, 7).len());
+        assert_ne!(0, bfs(&graph, 7, 7).len());
     }
 }
