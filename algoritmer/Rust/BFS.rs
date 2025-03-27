@@ -26,3 +26,30 @@ fn bfs(graph: &HashMap<i32, HashSet<i32>>, start_node: i32, end_node: i32) -> Ve
     path.reverse();
     path
 }
+
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_1() {
+        let graph = HashMap::from([
+            (1, HashSet::from([2,3])),
+            (2, HashSet::from([3,4])),
+            (3, HashSet::from([2,3,4,5])),
+            (4, HashSet::from([2,3,4])),
+            (5, HashSet::from([4,6])),
+            (6, HashSet::from([5])),
+            (7, HashSet::from([8])),
+            (8, HashSet::from([7]))
+        ]);
+        assert_eq!(1, bfs2(&graph, 1, 1).len());
+        assert_eq!(4, bfs2(&graph, 1, 6).len());
+        assert_eq!(0, bfs2(&graph, 1, 8).len());
+        assert_eq!(2, bfs2(&graph, 7, 8).len());
+        assert_eq!(2, bfs2(&graph, 8, 7).len());
+
+        assert_ne!(0, bfs2(&graph, 7, 7).len());
+    }
+}
