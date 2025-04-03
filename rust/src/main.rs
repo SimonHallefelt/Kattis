@@ -1,5 +1,6 @@
 use scraper::{Html, Selector};
 use reqwest::blocking::get;
+mod algoritmer;
 
 fn main() {
     println!("Hello, world!");
