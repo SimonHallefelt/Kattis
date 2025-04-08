@@ -6,12 +6,13 @@
 #include <algorithm>
 using namespace std;
 
-
+unordered_map<string, int> distances;
 vector<string> BFS(unordered_map<string, vector<string>> map, string startNode, string endNode) {
-    if (startNode == endNode) return {"startNode"};
+    if (startNode == endNode) return {startNode};
     unordered_map<string, string> previous = {{startNode, startNode}};
     queue<string> q; q.push(startNode);
     vector<string> path = {};
+    distances[startNode] = 0;
     
     while (q.size()) {
         auto node = q.front(); q.pop();
@@ -19,6 +20,7 @@ vector<string> BFS(unordered_map<string, vector<string>> map, string startNode, 
             if (previous.find(neighbor) == previous.end()) {
                 previous[neighbor] = node;
                 q.push(neighbor);
+                distances[neighbor] = distances[node]+1;
                 if (neighbor == endNode) {
                     path.push_back(neighbor);
                     while (neighbor != startNode) {
@@ -84,12 +86,14 @@ int main() {
 
 
     string target = "PAUL_ERDOS";
-    for (size_t i = 0; i < firstNames.size(); i++) {
-        vector<string> path = BFS(map, firstNames[i], target);
-        if (path.size()) {
-            cout << firstNames[i] << " " << path.size()-1 << endl;
+    vector<string> path = BFS(map, target, "bla");
+    for (auto name : firstNames) {
+        if (name == target) {
+            cout << name << " 0" << endl;
+        } else if (distances[name]) {
+            cout << name << " " << distances[name] << endl;
         } else {
-            cout << firstNames[i] << " no-connection" << endl;
+            cout << name << " no-connection" << endl;
         }
     }
     

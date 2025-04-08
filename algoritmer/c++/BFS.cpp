@@ -3,11 +3,11 @@
 #include <queue>
 using namespace std;
 
-vector<string> BFS(unordered_map<string, vector<string>> map, string startNode, string endNode) {
-    if (startNode == endNode) return {"startNode"};
-    unordered_map<string, string> previous = {{startNode, startNode}};
-    queue<string> q; q.push(startNode);
-    vector<string> path = {};
+vector<int> BFS(unordered_map<int, vector<int>> map, int startNode, int endNode) {
+    if (startNode == endNode) return {startNode};
+    unordered_map<int, int> previous = {{startNode, startNode}};
+    queue<int> q; q.push(startNode);
+    vector<int> path = {};
     
     while (q.size()) {
         auto node = q.front(); q.pop();
