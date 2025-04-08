@@ -45,7 +45,8 @@
         "vector": "cpp",
         "string": "cpp",
         "queue": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "xhash": "cpp"
     },
     "rust-analyzer.linkedProjects": [
         ".\\rust\\Cargo.toml",
