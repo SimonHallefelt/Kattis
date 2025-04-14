@@ -24,7 +24,7 @@ fn run(case: Vec<String>){
             }
         }
     }
-
+    
     if win == total {
         println!("1");
     }else if win == 0{
