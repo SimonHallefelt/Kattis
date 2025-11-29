@@ -39,3 +39,14 @@ g++ file.cpp (g++ file.cpp -o file)
 User Snippet (cpp.jason) (C:\Users\Simon\AppData\Roaming\Code\User\snippets\cpp.jason.code-snippets)
 skapa fil skriv "main"
 ```
+# C#
+```
+cd C#
+dotnet new console -n ProblemName
+dotnet sln add ProblemName
+dotnet run --project ProblemName
+
+first setup (make sln)
+dotnet new sln -n SolutionName
+```
+

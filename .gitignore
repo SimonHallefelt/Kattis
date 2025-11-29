@@ -1,10 +1,13 @@
-#rust
+# rust
 rust/target/*
 *.exe
 *.pdb
 rust/target/.rustc_info.json
 */.vscode
 
-#java
+# java
 *.class
 
+# C#
+C#/*/bin
+C#/*/obj

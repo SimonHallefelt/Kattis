@@ -26,7 +26,7 @@ fn run(data: &Vec<(i32, i32)>) -> (bool, (usize, usize)) {
         for j in 1..data.len() {
             let (x2, y2) = data[j];
             // (x1-x2)*a + (y1-y2)*b = 0, find all pairs a and b
-            let xd = x1-x2;
+            let xd = x1-x2; 
             let yd = y1-y2;
             if xd == 0 {
                 // b must be 0, a can be anything
