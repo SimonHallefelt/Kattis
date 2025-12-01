@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloWorld", "HelloWorld\HelloWorld.csproj", "{3CB1D122-8305-4C7F-9273-BEE2D09E7548}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode_Day1_1", "AdventOfCode_Day1_1\AdventOfCode_Day1_1.csproj", "{C8134C76-34C4-4E01-B56D-8470449140A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode_Day1_2", "AdventOfCode_Day1_2\AdventOfCode_Day1_2.csproj", "{018B9843-1C31-412F-9104-2C3A75D35316}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{3CB1D122-8305-4C7F-9273-BEE2D09E7548}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CB1D122-8305-4C7F-9273-BEE2D09E7548}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CB1D122-8305-4C7F-9273-BEE2D09E7548}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8134C76-34C4-4E01-B56D-8470449140A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8134C76-34C4-4E01-B56D-8470449140A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8134C76-34C4-4E01-B56D-8470449140A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8134C76-34C4-4E01-B56D-8470449140A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{018B9843-1C31-412F-9104-2C3A75D35316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{018B9843-1C31-412F-9104-2C3A75D35316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{018B9843-1C31-412F-9104-2C3A75D35316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{018B9843-1C31-412F-9104-2C3A75D35316}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
