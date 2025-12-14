@@ -1,5 +1,5 @@
 ﻿// var data = File.ReadAllLines("../../../ExampleData.txt"); // 33
-var data = File.ReadAllLines("../../../Data.txt"); // 
+var data = File.ReadAllLines("../../../Data.txt"); // 14677
 
 var lightTargets = new List<List<bool>>();
 var buttons = new List<List<List<int>>>();
@@ -18,50 +18,108 @@ for (int i = 0; i < lightTargets.Count(); i++)
 {
     var button = buttons[i];
     var requirement = requirements[i];
-    var value = bfs(requirement, button);
+    var value = bfs(requirement, button.ToHashSet().ToList().OrderBy(x => x.Count).ToList());
     if (value == -1)
         Console.WriteLine($"bfs failed on {i}");
     result += value;
     Console.WriteLine($"{result}, {i}");
+    Console.WriteLine($"-----------------------");
 }
-long bfs(List<int> target, List<List<int>> paths)
+long bfs(List<int> startValue, List<List<int>> paths)
 {
-    var tar = string.Join(" ", target);
-    var startValue = Enumerable.Repeat(0, target.Count()).ToList();
-    var visited = new HashSet<string> { string.Join(" ", startValue) };
+    var (order, alternatives) = GetOrder(startValue, paths);
+    var sortest = long.MaxValue;
+    var visited = new Dictionary<string, long> { {string.Join(" ", startValue), 0L} };
+    var target = string.Join(" ", Enumerable.Repeat(0, startValue.Count).ToList());
     var queue = new Queue<(List<int>, long)>();
     queue.Enqueue((startValue, 0L));
+
     while (queue.Count() > 0)
     {
         var q = queue.Dequeue();
-        var Counter = q.Item1;
+        var counter = q.Item1;
         var steps = q.Item2;
-        if (string.Join(" ", Counter).Equals(tar))
+        if (steps + counter.Max() >= sortest)
+            continue;
+        if (string.Join(" ", counter).Equals(target))
+            sortest = steps;
+        var i = 0;
+        foreach(var o in order)
         {
-            Console.WriteLine($"visited.Count = {visited.Count()}, target = {tar}");
-            return steps;
+            if (counter[o] == 0)
+                continue;
+            i = o;
+            break;
         }
-        foreach(var path in paths)
+        foreach(var alternative in alternatives[i])
         {
-            var newCounter = Counter.ToList();
+            var newCounter = counter.ToList();
+            var newSteps = steps;
             var skip = false;
-            foreach (var button in path)
+            do
             {
-                newCounter[button]++;
-                if (newCounter[button] > target[button])
+                newSteps++;
+                foreach(var button in paths[alternative])
                 {
-                    skip = true;
-                    break;
+                    newCounter[button]--;
+                    if (newCounter[button] < 0)
+                    {
+                        skip = true;
+                        break;
+                    }
                 }
-            }
+                if (skip)
+                    break;
+            } while(alternatives[i].Last() == alternative && newCounter[i] > 0);
             if (skip)
                 continue;
-            if (!visited.Add(string.Join(" ", newCounter)))
+            var newCounterString = string.Join($" ", newCounter);
+            if (visited.ContainsKey(newCounterString) && visited[newCounterString] <= newSteps)
                 continue;
-            queue.Enqueue((newCounter, steps + 1));
+            visited[newCounterString] = newSteps;
+            queue.Enqueue((newCounter, newSteps));
         }
     }
-    return -1;
+
+    Console.WriteLine($"visited.Count = {visited.Count()}, target = {string.Join(" ", startValue)}");
+    return sortest;
+}
+(List<int>, List<List<int>>) GetOrder(List<int> target, List<List<int>> paths) 
+{
+    var alternatives = Enumerable.Range(0, target.Count).Select(n => (n, new List<int>())).ToList();
+    for(var i = 0; i < paths.Count; i++)
+    {
+        var path = paths[i];
+        foreach (var button in path)
+        {
+            alternatives[button].Item2.Add(i);
+        }
+    }
+
+    var visited = new HashSet<int>();
+    var order = new List<int>();
+    while (visited.Count < target.Count)
+    {
+        alternatives = alternatives.OrderBy(x => x.Item2.Sum(p => paths[p].Count()) * -1).ToList();
+        alternatives = alternatives.OrderBy(x => Math.Pow(target[x.Item1], x.Item2.Count)).ToList();
+
+        for(var i = 0; i < alternatives.Count; i++)
+        {
+            var alt = alternatives[i];
+            if (!visited.Add(alt.Item1))
+                continue;
+            order.Add(alt.Item1);
+            for(var j = i+1; j < alternatives.Count; j++)
+            {
+                alternatives[j] = (alternatives[j].Item1, alternatives[j].Item2.Where(p => !alt.Item2.Contains(p)).ToList());
+            }
+            break;
+        }
+    }
+
+    var finalAlternatives = alternatives.OrderBy(x => x.Item1).Select(x => x.Item2).ToList();
+    Console.WriteLine($"order = {string.Join(" ", order)}, finalAlternatives = {string.Join(" | ", finalAlternatives.Select(x => string.Join(" ", x)))}");
+    return (order, finalAlternatives);
 }
 
 Console.WriteLine($"{result}");
